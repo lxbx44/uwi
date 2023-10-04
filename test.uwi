@@ -1,1 +1,2 @@
-retuwirn 30;
+priwint('HelloWorld');
+retuwirn 0;
