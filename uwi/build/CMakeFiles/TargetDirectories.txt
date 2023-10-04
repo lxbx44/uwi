@@ -1,3 +1,0 @@
-/home/lxbx/Documents/CODING/compiler/uwi/build/CMakeFiles/uwi.dir
-/home/lxbx/Documents/CODING/compiler/uwi/build/CMakeFiles/edit_cache.dir
-/home/lxbx/Documents/CODING/compiler/uwi/build/CMakeFiles/rebuild_cache.dir

@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/uwi.dir/src/main.cpp.o -o uwi 
