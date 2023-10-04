@@ -16,9 +16,14 @@ enum class TokenTy {
     _return,
     print,
     _input,
+    dec_string,
+    dec_int,
 
     _int,
     _string,
+    varname,
+
+    equal,
 
     semi,
     lpar,
@@ -61,14 +66,20 @@ std::vector<Token> tokenize(const std::string& str) {
             } else if (std::isalpha(c)) {
                 buf.push_back(c);
 
-                if (buf == "retuwirn") {
+                if (buf == "return") {
                     tokens.push_back({.type = TokenTy::_return});
                     buf.clear();
-                } else if (buf == "priwint") {
+                } else if (buf == "printline") {
                     tokens.push_back({.type = TokenTy::print});
                     buf.clear();
-                } else if (buf == "iwimput") {
+                } else if (buf == "tinput") {
                     tokens.push_back({.type = TokenTy::_input});
+                    buf.clear();
+                } else if (buf == "str") {
+                    tokens.push_back({.type = TokenTy::dec_string});
+                    buf.clear();
+                } else if (buf == "int") {
+                    tokens.push_back({.type = TokenTy::dec_int});
                     buf.clear();
                 }
             }
@@ -97,6 +108,28 @@ std::vector<Token> tokenize(const std::string& str) {
         } else if (c == ',') {
             tokens.push_back({.type = TokenTy::coma});
             buf.clear();
+        } else if (c == '$') {
+            buf.push_back(c);
+            i++;
+            while (std::isalnum(str.at(i))) {
+                buf.push_back(str.at(i));
+                i++;
+            }
+            i--;
+            tokens.push_back({.type = TokenTy::varname, .value = buf});
+            buf.clear();
+        } else if (c == '=') {
+            tokens.push_back({.type = TokenTy::equal});
+            buf.clear();
+        } else if (c == '%') {
+            i++;
+            if (str.at(i) == '%') {
+                i++;
+                while (str.at(i) != '%') {
+                    i++;
+                }
+                continue;
+            }
         } else if (std::isspace(c)) {
             continue;
         } else {
@@ -183,6 +216,18 @@ int main(int argc, char* argv[]) {
                 break;
             case TokenTy::_input:
                 std::cout << "_input";
+                break;
+            case TokenTy::varname:
+                std::cout << "varname";
+                break;
+            case TokenTy::dec_string:
+                std::cout << "dec_string";
+                break;
+            case TokenTy::dec_int:
+                std::cout << "dec_int";
+                break;
+            case TokenTy::equal:
+                std::cout << "equal";
                 break;
         }
 
