@@ -12,10 +12,6 @@ at the beggining and one at the end.
 Both single and multiple line comments are
 done the same way.
 
-%
-
-
-%%
 
 To declare a variable do the following:
   <type> <name> = <value>;
