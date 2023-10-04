@@ -14,14 +14,17 @@
 
 enum class TokenTy {
     _return,
+    print,
+    _input,
+
     _int,
     _string,
+
     semi,
-    print,
     lpar,
     rpar,
     qmark,
-    extra
+    coma
 };
 
 struct Token {
@@ -45,122 +48,67 @@ std::vector<Token> tokenize(const std::string& str) {
     for (int i = 0; i < str.length(); i++) {
         char c = str.at(i);
 
-        if (std::isalpha(c)) {
-            buf.push_back(c);
-            i++;
-            while (std::isalnum(str.at(i))) {
-                buf.push_back(str.at(i));
-                i++;
-            }
-            i--;
+        if (std::isalpha(c) || std::isspace(c)) {
+            if (i > 0 && (str.at(i - 1) == '\'' || str.at(i - 1) == '"')) {
+                while (str.at(i) != '\'' && str.at(i) != '"') {
+                    buf.push_back(str.at(i));
+                    i++;
+                }
+                i--;
+                tokens.push_back({.type = TokenTy::_string, .value = buf});
+                buf.clear();
 
-            if (buf == "retuwirn") {
-                tokens.push_back({.type = TokenTy::_return});
-                buf.clear();
-                continue;
-            } else if (buf == "priwint") {
-                tokens.push_back({.type = TokenTy::print});
-                buf.clear();
-                continue;
-            } else {
-                tokens.push_back({.type = TokenTy::extra, .value = buf});
-                buf.clear();
-                continue;
+            } else if (std::isalpha(c)) {
+                buf.push_back(c);
+
+                if (buf == "retuwirn") {
+                    tokens.push_back({.type = TokenTy::_return});
+                    buf.clear();
+                } else if (buf == "priwint") {
+                    tokens.push_back({.type = TokenTy::print});
+                    buf.clear();
+                } else if (buf == "iwimput") {
+                    tokens.push_back({.type = TokenTy::_input});
+                    buf.clear();
+                }
             }
         } else if (std::isdigit(c)) {
-            buf.push_back(c);
-            i++;
             while (std::isdigit(str.at(i))) {
                 buf.push_back(str.at(i));
                 i++;
             }
             i--;
+
             tokens.push_back({.type = TokenTy::_int, .value = buf});
             buf.clear();
+
         } else if (c == ';') {
             tokens.push_back({.type = TokenTy::semi});
+            buf.clear();
         } else if (c == '(') {
             tokens.push_back({.type = TokenTy::lpar});
+            buf.clear();
         } else if (c == ')') {
             tokens.push_back({.type = TokenTy::rpar});
+            buf.clear();
         } else if (c == '\'' || c == '"') {
             tokens.push_back({.type = TokenTy::qmark});
-        } else if (c == '"') {
-            tokens.push_back({.type = TokenTy::qmark});
+            buf.clear();
+        } else if (c == ',') {
+            tokens.push_back({.type = TokenTy::coma});
             buf.clear();
         } else if (std::isspace(c)) {
             continue;
         } else {
-            std::cout << "ERROR COMPILING " << ".uwi" << std::endl;
-            std::cout << "\n" << buf << " doesn't exist" << std::endl;
-            exit(EXIT_FAILURE);
+            std::cout << "nah" << std::endl;
         }
     }
-
     return tokens;
 };
 
 std::string tokens_to_asm(const std::vector<Token>& tokens, std::string fname) {
     std::stringstream output;
-    output << "global _start\n";
-    output << "_start:\n";
 
-    bool myStrDefined = false;
-
-    for (int i = 0; i < tokens.size(); i++) {
-        const Token& token = tokens.at(i);
-        if (token.type == TokenTy::_return) {
-            if (i + 1 < tokens.size() && tokens.at(i + 1).type == TokenTy::_int) {
-                if (i + 2 < tokens.size() && tokens.at(i + 2).type == TokenTy::semi) {
-                    int num = std::stoi(tokens.at(i + 1).value.value());
-
-                    if (num > 255) {
-                        std::cout << "ERROR COMPILING " << fname << ".uwi" << std::endl;
-                        std::cout << "\nThe returm value of the main function shoud be an 8bit number (0-255)" << std::endl;
-                        del_files(fname, true);
-                        std::system("rm -f out.asm");
-                        exit(EXIT_FAILURE);
-                    } else {
-                        output << "    mov rax, 60\n";
-                        output << "    mov rdi, " << num << "\n";
-                        output << "    syscall";
-                    }
-                }
-            }
-        } else if (token.type == TokenTy::print) {
-            if (i + 1 < tokens.size() && tokens.at(i + 1).type == TokenTy::lpar) {
-                if (i + 2 < tokens.size() && tokens.at(i + 2).type == TokenTy::qmark) {
-                    int j = i + 3;
-                    while (j < tokens.size() && tokens.at(j).type != TokenTy::qmark) {
-                        j++;
-                    }
-                    if (j >= tokens.size()) {
-                        std::cerr << "Error: Missing closing quatations marks" << std::endl;
-                        exit(EXIT_FAILURE);
-                    }
-
-                    if (tokens.at(i + 3).value.has_value()) {
-                        std::string stringContent = tokens.at(i + 3).value.value();
-
-                        output << "section .data\n";
-                        output << "    my_str db \"" << stringContent << "\",0\n";
-
-                        output << "section .text\n";
-                        output << "    mov rax, 1\n";
-                        output << "    mov rdi, 1\n";
-                        output << "    lea rsi, [my_str]\n";
-                        output << "    mov rdx, " << stringContent.length() << "\n";
-                        output << "    syscall\n";
-
-                    } else {
-                        std::cerr << "Error: String content is not set" << std::endl;
-                        exit(EXIT_FAILURE);
-                    }
-                    i = j;
-                }
-            }
-        }
-    }
     return output.str();
 }
 
@@ -198,9 +146,52 @@ int main(int argc, char* argv[]) {
         contents = contents_stram.str();
     }
 
+    std::cout << contents << std::endl;
+
 
     std::vector<Token> tokens = tokenize(contents);
-   
+
+    for (const auto& token : tokens) {
+        std::cout << "Token Type: ";
+        switch (token.type) {
+            case TokenTy::_return:
+                std::cout << "_return";
+                break;
+            case TokenTy::_int:
+                std::cout << "_int";
+                break;
+            case TokenTy::_string:
+                std::cout << "_string";
+                break;
+            case TokenTy::semi:
+                std::cout << "semi";
+                break;
+            case TokenTy::print:
+                std::cout << "print";
+                break;
+            case TokenTy::lpar:
+                std::cout << "lpar";
+                break;
+            case TokenTy::rpar:
+                std::cout << "rpar";
+                break;
+            case TokenTy::qmark:
+                std::cout << "qmark";
+                break;
+            case TokenTy::coma:
+                std::cout << "coma";
+                break;
+            case TokenTy::_input:
+                std::cout << "_input";
+                break;
+        }
+
+        if (token.value.has_value()) {
+            std::cout << ", Value: " << token.value.value();
+        }
+        std::cout << std::endl;
+    }
+    /*
     {
         std::fstream file("out.asm", std::ios::out);
         file << tokens_to_asm(tokens, uwiname);
@@ -213,6 +204,8 @@ int main(int argc, char* argv[]) {
     del_files(uwiname);
 
     std::cout << "Succesfully compiled " << uwiname << ".wui" << std::endl;
+    */
+
     return EXIT_SUCCESS;
 }
 
