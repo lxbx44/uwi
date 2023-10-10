@@ -82,10 +82,9 @@ return 0;
 
 ## How to compile **uwic** (uwi compiler)
 
-`cmake -S . -B build && cmake --build build`
+`cmake build`
 
 ## How to compile **uwi** (.uwi file)
 
-`build/uwic <filename.uwi to compile>`
+`uwic <filename.uwi to compile>`
 
-The binary of the uwi file will be in your current directory

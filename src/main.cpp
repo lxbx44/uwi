@@ -275,9 +275,6 @@ int main(int argc, char* argv[]) {
         contents = contents_stram.str();
     }
 
-    std::cout << contents << std::endl;
-
-
     std::vector<Token> tokens = tokenize(contents);
 
     viewtokens(tokens);
