@@ -17,6 +17,7 @@ To declare a variable do the following:
 TYPES:
     - str -> string
     - int -> integers
+    - char -> characters
 
 NAMES:
     - Only alphanumeric values.
@@ -25,16 +26,20 @@ NAMES:
     - IT MUST START WITH `$`
 
 VALUES:
-    - String values are between '', "", "' or '".
-    - Integers are just integers.
+    - String values go between '', "", "' or '".
+    - Integers are just integers, there are no
+      need for brackets.
+    - Characters go like strings but there must
+      only be 1 character
 
 SEMICOLON:
     - Is mandatory
 
 %
 
-str $varName = "Bojour";
+str $varName = "Bonjour";
 int $int1 = 23;
+char $character = 'j';
 
 
 %%
@@ -51,6 +56,7 @@ brakets:
 %
 
 printline("Hello world");
+printline("${varName} monde");
 
 
 %%

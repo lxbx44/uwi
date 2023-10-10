@@ -21,13 +21,19 @@ enum class TokenTy {
 
     _int,
     _string,
+    _char,
     varname,
 
     equal,
+    loop,
 
     semi,
     lpar,
     rpar,
+    lsbraq,
+    rsbraq,
+    lcbraq,
+    rcbraq,
     qmark,
     coma
 };
@@ -75,11 +81,17 @@ std::vector<Token> tokenize(const std::string& str) {
                 } else if (buf == "tinput") {
                     tokens.push_back({.type = TokenTy::_input});
                     buf.clear();
+                } else if (buf == "loop") {
+                    tokens.push_back({.type = TokenTy::loop});
+                    buf.clear();
                 } else if (buf == "str") {
                     tokens.push_back({.type = TokenTy::dec_string});
                     buf.clear();
                 } else if (buf == "int") {
                     tokens.push_back({.type = TokenTy::dec_int});
+                    buf.clear();
+                } else if (buf == "char") {
+                    tokens.push_back({.type = TokenTy::_char});
                     buf.clear();
                 }
             }
@@ -101,6 +113,18 @@ std::vector<Token> tokenize(const std::string& str) {
             buf.clear();
         } else if (c == ')') {
             tokens.push_back({.type = TokenTy::rpar});
+            buf.clear();
+        } else if (c == '[') {
+            tokens.push_back({.type = TokenTy::lsbraq});
+            buf.clear();
+        } else if (c == ']') {
+            tokens.push_back({.type = TokenTy::rsbraq});
+            buf.clear();
+        } else if (c == '{') {
+            tokens.push_back({.type = TokenTy::lcbraq});
+            buf.clear();
+        } else if (c == '}') {
+            tokens.push_back({.type = TokenTy::rcbraq});
             buf.clear();
         } else if (c == '\'' || c == '"') {
             tokens.push_back({.type = TokenTy::qmark});
@@ -145,6 +169,78 @@ std::string tokens_to_asm(const std::vector<Token>& tokens, std::string fname) {
     return output.str();
 }
 
+void viewtokens(std::vector<Token> tokens) {
+    for (const auto& token : tokens) {
+        std::cout << "Token Type: ";
+        switch (token.type) {
+            case TokenTy::_return:
+                std::cout << "_return";
+                break;
+            case TokenTy::_int:
+                std::cout << "_int";
+                break;
+            case TokenTy::_string:
+                std::cout << "_string";
+                break;
+            case TokenTy::semi:
+                std::cout << "semi\n";
+                break;
+            case TokenTy::print:
+                std::cout << "print";
+                break;
+            case TokenTy::lpar:
+                std::cout << "lpar";
+                break;
+            case TokenTy::rpar:
+                std::cout << "rpar";
+                break;
+            case TokenTy::qmark:
+                std::cout << "qmark";
+                break;
+            case TokenTy::coma:
+                std::cout << "coma";
+                break;
+            case TokenTy::_input:
+                std::cout << "_input";
+                break;
+            case TokenTy::varname:
+                std::cout << "varname";
+                break;
+            case TokenTy::dec_string:
+                std::cout << "dec_string";
+                break;
+            case TokenTy::dec_int:
+                std::cout << "dec_int";
+                break;
+            case TokenTy::equal:
+                std::cout << "equal";
+                break;
+            case TokenTy::_char:
+                std::cout << "_char";
+                break;
+            case TokenTy::lsbraq:
+                std::cout << "lsbraq";
+                break;
+            case TokenTy::rsbraq:
+                std::cout << "rsbraq";
+                break;
+            case TokenTy::lcbraq:
+                std::cout << "lcbraq";
+                break;
+            case TokenTy::rcbraq:
+                std::cout << "rcbraq";
+                break;
+            case TokenTy::loop:
+                std::cout << "loop";
+                break;
+        }
+
+        if (token.value.has_value()) {
+            std::cout << ", Value: " << token.value.value();
+        }
+        std::cout << std::endl;
+    }
+}
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
@@ -184,58 +280,8 @@ int main(int argc, char* argv[]) {
 
     std::vector<Token> tokens = tokenize(contents);
 
-    for (const auto& token : tokens) {
-        std::cout << "Token Type: ";
-        switch (token.type) {
-            case TokenTy::_return:
-                std::cout << "_return";
-                break;
-            case TokenTy::_int:
-                std::cout << "_int";
-                break;
-            case TokenTy::_string:
-                std::cout << "_string";
-                break;
-            case TokenTy::semi:
-                std::cout << "semi";
-                break;
-            case TokenTy::print:
-                std::cout << "print";
-                break;
-            case TokenTy::lpar:
-                std::cout << "lpar";
-                break;
-            case TokenTy::rpar:
-                std::cout << "rpar";
-                break;
-            case TokenTy::qmark:
-                std::cout << "qmark";
-                break;
-            case TokenTy::coma:
-                std::cout << "coma";
-                break;
-            case TokenTy::_input:
-                std::cout << "_input";
-                break;
-            case TokenTy::varname:
-                std::cout << "varname";
-                break;
-            case TokenTy::dec_string:
-                std::cout << "dec_string";
-                break;
-            case TokenTy::dec_int:
-                std::cout << "dec_int";
-                break;
-            case TokenTy::equal:
-                std::cout << "equal";
-                break;
-        }
+    viewtokens(tokens);
 
-        if (token.value.has_value()) {
-            std::cout << ", Value: " << token.value.value();
-        }
-        std::cout << std::endl;
-    }
     /*
     {
         std::fstream file("out.asm", std::ios::out);
