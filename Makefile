@@ -3,7 +3,7 @@ BUILD_DIR = build
 CXX = g++  # Use g++ for C++ source files
 
 # List of source files and their corresponding object files
-SRCS = parser.cpp remove.cpp tokenToAsm.cpp main.cpp
+SRCS = tokenization.cpp remove.cpp tokenToAsm.cpp main.cpp
 OBJS = $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 
 # Compiler and linker flags

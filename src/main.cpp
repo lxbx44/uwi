@@ -1,23 +1,12 @@
-#include <algorithm>
-#include <cctype>
-#include <cstdlib>
-#include <cwctype>
-#include <ios>
 #include <iostream>
 #include <fstream>
-#include <iterator>
-#include <optional>
 #include <sstream>
 #include <string>
-#include <system_error>
 #include <vector>
 
-#include "./parser.hpp"
+#include "./tokenization.hpp"
 #include "./remove.hpp"
 #include "./tokenToAsm.hpp"
-
-
-
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
@@ -38,6 +27,7 @@ int main(int argc, char* argv[]) {
     std::string t;
 
     std::vector<std::string> ts;
+
     while (std::getline(ss, t, '.')) {
         ts.push_back(t);
     }
