@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
         contents = contents_stram.str();
     }
 
-    std::vector<Token> tokens = tokenize(contents);
+    std::vector<Token> tokens = tokenize(contents, uwiname);
 
 
     /*
