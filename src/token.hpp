@@ -50,6 +50,8 @@ enum class TokenTy {
 
     _gt,
     _st,
+    _get,
+    _set,
     _equal,
     _notequal,
 
@@ -59,10 +61,13 @@ enum class TokenTy {
 
     _asign,
     _asign_sum,
-    _asign_min,
+    _asign_sub,
     _asign_mult,
     _asign_div,
     _asign_mod,
+
+    _sum1,
+    _sub1,
 
     // Punctuation
     _semicolon,
@@ -80,9 +85,7 @@ enum class TokenTy {
     _right_sqbraquet,
 
     // Other
-    _comment_line,
-    _start_comment,
-    _end_comment
+    _comment
 };
 
 struct Token {

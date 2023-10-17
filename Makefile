@@ -1,12 +1,11 @@
 SRC_DIR = src
 BUILD_DIR = build
-CXX = g++  # Use g++ for C++ source files
+CXX = g++ 
+INSTALL_DIR = /usr/local/bin
 
-# List of source files and their corresponding object files
 SRCS = tokenization.cpp remove.cpp tokenToAsm.cpp main.cpp
 OBJS = $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 
-# Compiler and linker flags
 CXXFLAGS = -std=c++17 -Wall
 LDFLAGS = -lstdc++
 
@@ -18,10 +17,13 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
 uwic: $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(BUILD_DIR)/$@ $(LDFLAGS)
 
+install: uwic
+	sudo cp $(BUILD_DIR)/uwic $(INSTALL_DIR)
+
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 clean:
 	rm -rf $(BUILD_DIR)
 
-.PHONY: all clean
+.PHONY: all clean install
