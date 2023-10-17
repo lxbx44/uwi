@@ -325,6 +325,13 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
             }
             buf.clear();
             tokens.push_back({.type = TokenTy::_comment});
+        } else {
+            std::cerr << "error in " << filename << ".uwi on line " << line_count;
+            std::cerr << "\nerror message: Syntax error\n";
+            std::cerr << " --> Line " << line_count << ": " << str.substr(i - buf.length(), buf.length()) << "\n";
+            std::cerr << " --> " << "Unexpected token: '" << buf << "'\n";
+            std::cerr << "\nerror: Found an unexpected token. Expected a valid keyword or identifier.\n";
+            exit(EXIT_FAILURE);
         }
     }
     return tokens;

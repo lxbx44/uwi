@@ -7,6 +7,7 @@
 #include "./tokenization.hpp"
 #include "./remove.hpp"
 #include "./tokenToAsm.hpp"
+#include "./parser.hpp"
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
@@ -43,6 +44,7 @@ int main(int argc, char* argv[]) {
     }
 
     std::vector<Token> tokens = tokenize(contents, uwiname);
+
 
 
     /*
