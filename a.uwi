@@ -1,0 +1,8 @@
+printline("hello world");
+
+if (name == "hello") {
+    tinput($name, "Enter a name");
+    printline("$name");
+} else {
+    return 1;
+}
