@@ -6,7 +6,7 @@
 
 #include "./tokenization.hpp"
 #include "./remove.hpp"
-#include "./tokenToAsm.hpp"
+#include "./toAsm.hpp"
 #include "./parser.hpp"
 
 int main(int argc, char* argv[]) {
