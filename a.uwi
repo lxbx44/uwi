@@ -5,7 +5,7 @@ char $input;
 loop {
     tinput($input, "Enter a letter: ");
 
-    if ($input == "w") {
+    if ($input == 'w') {
         printline("Yayyy, you won!");
         break;
     }
@@ -13,3 +13,5 @@ loop {
 }
 
 return 0;
+
+float $a = 0.34;

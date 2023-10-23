@@ -31,7 +31,7 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
 
     int strlength = str.length();
 
-    size_t line_count = 2;
+    size_t line_count = 1;
 
     for (size_t i = 0; i < str.length(); i++) {
         char c = str.at(i);
@@ -145,209 +145,201 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
 
             tokens.push_back({.type = TokenTy::str_l, .value = buf});
             buf.clear();
-        } else if (std::isdigit(c) || c == '.') {
+        } else if (std::isdigit(c)) {
+            int pointCount = 0;
+
             while (std::isdigit(str.at(i)) || str.at(i) == '.') {
+                if (str.at(i) == '.') {
+                    pointCount++;
+                }
                 buf.push_back(str.at(i));
                 i++;
             }
 
-            if (is_valid_float(buf)) {
+            if (pointCount > 1) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: Syntax error\n";
+                std::cerr << " --> Line " << line_count << ": " << str.substr(i - buf.length(), buf.length()) << "\n";
+                std::cerr << " --> Invalid float literal, there can only be 1 '.'\n";
+                exit(EXIT_FAILURE);
+            }
+
+            if (pointCount == 1) {
                 tokens.push_back({.type = TokenTy::float_l, .value = buf});
             } else {
-                std::cerr << "error in " << filename << ".uwi on line " << line_count;
-                std::cerr << "\nerror message: Syntax error\n";
-                std::cerr << " --> Line " << line_count << ": " << str.substr(i - buf.length(), buf.length()) << "\n";
-                std::cerr << " --> Invalid float literal\n";
-                exit(EXIT_FAILURE);
+                tokens.push_back({.type = TokenTy::int_l, .value = buf});
             }
 
             buf.clear();
-        } else if (std::isdigit(c)) {
-            while (std::isdigit(str.at(i))) {
+        } else if (c == '\'') {
+            i++;
+            buf.push_back(str.at(i));
+            i++;
+
+            if (str.at(i) != '\'') {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: Syntax error\n";
+                std::cerr << " --> Line " << line_count << ": " << str.substr(i - buf.length(), buf.length()) << "\n";
+                std::cerr << " --> Invalid character literal\n";
+                exit(EXIT_FAILURE);
+            }
+
+            tokens.push_back({.type = TokenTy::char_l, .value = buf});
+            buf.clear();
+
+        } else if (c == '+') {
+            if (str.at(i + 1) == '+') {
+                tokens.push_back({.type = TokenTy::_sum1});
+                i++;
+            } else if (str.at(i + 1) == '=') {
+                tokens.push_back({.type = TokenTy::_asign_sum});
+                i++;
+            } else {
+                tokens.push_back({.type = TokenTy::_sum});
+            }
+            buf.clear();
+        } else if (c == '-') {
+            if (str.at(i + 1) == '-') {
+                tokens.push_back({.type = TokenTy::_sub1});
+                i++;
+            } else if (str.at(i + 1) == '=') {
+                tokens.push_back({.type = TokenTy::_asign_sub});
+                i++;
+            } else {
+                tokens.push_back({.type = TokenTy::_subtraction});
+            }
+            buf.clear();
+        } else if (c == '*') {
+            if (str.at(i + 1) == '=') {
+                tokens.push_back({.type = TokenTy::_asign_mult});
+                i++;
+            } else {
+                tokens.push_back({.type = TokenTy::_mult});
+            }
+            buf.clear();
+        } else if (c == '/') {
+            if (str.at(i + 1) == '=') {
+                tokens.push_back({.type = TokenTy::_asign_div});
+                i++;
+            } else {
+                tokens.push_back({.type = TokenTy::_div});
+            }
+            buf.clear();
+        } else if (c == '%') {
+            if (str.at(i + 1) == '=') {
+                tokens.push_back({.type = TokenTy::_asign_mod});
+                i++;
+            } else {
+                tokens.push_back({.type = TokenTy::_mod});
+            }
+            buf.clear();
+        } else if (c == '>') {
+            if (str.at(i + 1) == '=') {
+                tokens.push_back({.type = TokenTy::_get});
+                i++;
+            } else {
+                tokens.push_back({.type = TokenTy::_gt});
+            }
+            buf.clear();
+        } else if (c == '<') {
+            if (str.at(i + 1) == '=') {
+                tokens.push_back({.type = TokenTy::_set});
+                i++;
+            } else {
+                tokens.push_back({.type = TokenTy::_st});
+            }
+            buf.clear();
+        } else if (c == '|') {
+            if (str.at(i + 1) == '|') {
+                tokens.push_back({.type = TokenTy::_or});
+                i++;
+            }
+            buf.clear();
+        } else if (c == '&') {
+            if (str.at(i + 1) == '&') {
+                tokens.push_back({.type = TokenTy::_and});
+                i++;
+            }
+            buf.clear();
+        } else if (c == '!') {
+            if (str.at(i + 1) == '=') {
+                tokens.push_back({.type = TokenTy::_notequal});
+                i++;
+            }
+            buf.clear();
+        } else if (c == '=') {
+            if (str.at(i + 1) == '=') {
+                tokens.push_back({.type = TokenTy::_equal});
+                i++;
+            } else {
+                tokens.push_back({.type = TokenTy::_asign});
+            }
+            buf.clear();
+        } else if (c == ';') {
+            tokens.push_back({.type = TokenTy::_semicolon});
+            buf.clear();
+        } else if (c == ',') {
+            tokens.push_back({.type = TokenTy::_coma});
+            buf.clear();
+        } else if (c == '.') {
+            if (std::isdigit(str.at(i + 1))) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: Syntax error\n";
+                std::cerr << " --> Line " << line_count << ": " << str.substr(i - buf.length(), buf.length()) << "\n";
+                std::cerr << " --> Invalid usage of float, 0 is required (for example: 0.32)\n";
+                exit(EXIT_FAILURE);
+            }
+            tokens.push_back({.type = TokenTy::_period});
+            buf.clear();
+        } else if (c == ':') {
+            tokens.push_back({.type = TokenTy::_colon});
+            buf.clear();
+        } else if (c == '(') {
+            tokens.push_back({.type = TokenTy::_left_par});
+            buf.clear();
+        } else if (c == ')') {
+            tokens.push_back({.type = TokenTy::_right_par});
+            buf.clear();
+        } else if (c == '{') {
+            tokens.push_back({.type = TokenTy::_lef_brace});
+            buf.clear();
+        } else if (c == '}') {
+            tokens.push_back({.type = TokenTy::_right_brace});
+            buf.clear();
+        } else if (c == '[') {
+            tokens.push_back({.type = TokenTy::_left_sqbraquet});
+            buf.clear();
+        } else if (c == ']') {
+            tokens.push_back({.type = TokenTy::_right_sqbraquet});
+            buf.clear();
+        } else if (c == '/') {
+            if (str.at(i + 1) == '/') {
+                i += 2;
+                while (i < str.length() && str.at(i) != '\n') {
+                    i++;
+                }
+                if (i < str.length()) {
+                    i++;
+                }
+            }
+            buf.clear();
+            tokens.push_back({.type = TokenTy::_comment});
+        } else if (c == '$') {
+            i++;
+            while (std::isalnum(str.at(i))) {
                 buf.push_back(str.at(i));
                 i++;
             }
 
-            if (is_valid_int(buf)) {
-                tokens.push_back({.type = TokenTy::int_l, .value = buf});
-            } else {
-                std::cerr << "error in " << filename << ".uwi on line " << line_count;
-                std::cerr << "\nerror message: Syntax error\n";
-                std::cerr << " --> Line " << line_count << ": " << str.substr(i - buf.length(), buf.length()) << "\n";
-                std::cerr << " --> Invalid integer literal\n";
-                exit(EXIT_FAILURE);
-            }
-
+            tokens.push_back({.type = TokenTy::_var_name, .value = buf});
             buf.clear();
-        } else if (!std::isalpha(c) && !std::isdigit(c)) {
-            if (c == '\'') {
-                buf.push_back(c);
-                i++;
-
-                if (i < str.length()) {
-                    buf.push_back(str.at(i));
-                    i++;
-                }
-
-                if (i < str.length() && str.at(i) == '\'') {
-                    buf.push_back('\'');
-                    tokens.push_back({.type = TokenTy::char_l, .value = buf});
-                    buf.clear();
-                } else {
-                    std::cerr << "error in " << filename << ".uwi on line " << line_count;
-                    std::cerr << "\nerror message: Syntax error\n";
-                    std::cerr << " --> Line " << line_count << ": " << str.substr(i - buf.length(), buf.length()) << "\n";
-                    std::cerr << " --> Invalid character literal\n";
-                    exit(EXIT_FAILURE);
-                }
-                i--;
-            } else if (c == '+') {
-                if (str.at(i + 1) == '+') {
-                    tokens.push_back({.type = TokenTy::_sum1});
-                    i++;
-                } else if (str.at(i + 1) == '=') {
-                    tokens.push_back({.type = TokenTy::_asign_sum});
-                    i++;
-                } else {
-                    tokens.push_back({.type = TokenTy::_sum});
-                }
-                buf.clear();
-            } else if (c == '-') {
-                if (str.at(i + 1) == '-') {
-                    tokens.push_back({.type = TokenTy::_sub1});
-                    i++;
-                } else if (str.at(i + 1) == '=') {
-                    tokens.push_back({.type = TokenTy::_asign_sub});
-                    i++;
-                } else {
-                    tokens.push_back({.type = TokenTy::_subtraction});
-                }
-                buf.clear();
-            } else if (c == '*') {
-                if (str.at(i + 1) == '=') {
-                    tokens.push_back({.type = TokenTy::_asign_mult});
-                    i++;
-                } else {
-                    tokens.push_back({.type = TokenTy::_mult});
-                }
-                buf.clear();
-            } else if (c == '/') {
-                if (str.at(i + 1) == '=') {
-                    tokens.push_back({.type = TokenTy::_asign_div});
-                    i++;
-                } else {
-                    tokens.push_back({.type = TokenTy::_div});
-                }
-                buf.clear();
-            } else if (c == '%') {
-                if (str.at(i + 1) == '=') {
-                    tokens.push_back({.type = TokenTy::_asign_mod});
-                    i++;
-                } else {
-                    tokens.push_back({.type = TokenTy::_mod});
-                }
-                buf.clear();
-            } else if (c == '>') {
-                if (str.at(i + 1) == '=') {
-                    tokens.push_back({.type = TokenTy::_get});
-                    i++;
-                } else {
-                    tokens.push_back({.type = TokenTy::_gt});
-                }
-                buf.clear();
-            } else if (c == '<') {
-                if (str.at(i + 1) == '=') {
-                    tokens.push_back({.type = TokenTy::_set});
-                    i++;
-                } else {
-                    tokens.push_back({.type = TokenTy::_st});
-                }
-                buf.clear();
-            } else if (c == '|') {
-                if (str.at(i + 1) == '|') {
-                    tokens.push_back({.type = TokenTy::_or});
-                    i++;
-                }
-                buf.clear();
-            } else if (c == '&') {
-                if (str.at(i + 1) == '&') {
-                    tokens.push_back({.type = TokenTy::_and});
-                    i++;
-                }
-                buf.clear();
-            } else if (c == '!') {
-                if (str.at(i + 1) == '=') {
-                    tokens.push_back({.type = TokenTy::_notequal});
-                    i++;
-                }
-                buf.clear();
-            } else if (c == '=') {
-                if (str.at(i + 1) == '=') {
-                    tokens.push_back({.type = TokenTy::_equal});
-                    i++;
-                } else {
-                    tokens.push_back({.type = TokenTy::_asign});
-                }
-                buf.clear();
-            } else if (c == ';') {
-                tokens.push_back({.type = TokenTy::_semicolon});
-                buf.clear();
-            } else if (c == ',') {
-                tokens.push_back({.type = TokenTy::_coma});
-                buf.clear();
-            } else if (c == '.') {
-                tokens.push_back({.type = TokenTy::_period});
-                buf.clear();
-            } else if (c == ':') {
-                tokens.push_back({.type = TokenTy::_colon});
-                buf.clear();
-            } else if (c == '(') {
-                tokens.push_back({.type = TokenTy::_left_par});
-                buf.clear();
-            } else if (c == ')') {
-                tokens.push_back({.type = TokenTy::_right_par});
-                buf.clear();
-            } else if (c == '{') {
-                tokens.push_back({.type = TokenTy::_lef_brace});
-                buf.clear();
-            } else if (c == '}') {
-                tokens.push_back({.type = TokenTy::_right_brace});
-                buf.clear();
-            } else if (c == '[') {
-                tokens.push_back({.type = TokenTy::_left_sqbraquet});
-                buf.clear();
-            } else if (c == ']') {
-                tokens.push_back({.type = TokenTy::_right_sqbraquet});
-                buf.clear();
-            } else if (c == '/') {
-                if (str.at(i + 1) == '/') {
-                    i += 2;
-                    while (i < str.length() && str.at(i) != '\n') {
-                        i++;
-                    }
-                    if (i < str.length()) {
-                        i++;
-                    }
-                }
-                buf.clear();
-                tokens.push_back({.type = TokenTy::_comment});
-            } else if (c == '$') {
-                i++;
-                while (std::isalnum(str.at(i))) {
-                    buf.push_back(str.at(i));
-                    i++;
-                }
-
-                tokens.push_back({.type = TokenTy::_var_name, .value = buf});
-                buf.clear();
-            } else {
-                std::cerr << "error in " << filename << ".uwi on line " << line_count;
-                std::cerr << "\nerror message: Syntax error\n";
-                std::cerr << " --> Line " << line_count << ": " << str.substr(i - buf.length(), buf.length()) << "\n";
-                std::cerr << " --> " << "Unexpected token: '" << buf << "'\n";
-                std::cerr << "\nerror: Found an unexpected token. Expected a valid keyword or identifier.\n";
-                exit(EXIT_FAILURE);
-            }
+        } else {
+            std::cerr << "error in " << filename << ".uwi on line " << line_count;
+            std::cerr << "\nerror message: Syntax error\n";
+            std::cerr << " --> Line " << line_count << ": " << str.substr(i - buf.length(), buf.length()) << "\n";
+            std::cerr << " --> " << "Unexpected token: '" << buf << "'\n";
+            std::cerr << "\nerror: Found an unexpected token. Expected a valid keyword or identifier.\n";
+            exit(EXIT_FAILURE);
         }
     }
     return tokens;
