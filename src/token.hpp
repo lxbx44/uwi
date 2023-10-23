@@ -85,7 +85,8 @@ enum class TokenTy {
     _right_sqbraquet,
 
     // Other
-    _comment
+    _comment,
+    _var_name
 };
 
 struct Token {

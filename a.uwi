@@ -1,8 +1,15 @@
-printline("hello world");
+str $string1 = "hello";
 
-if (name == "hello") {
-    tinput($name, "Enter a name");
-    printline("$name");
-} else {
-    return 1;
+char $input;
+
+loop {
+    tinput($input, "Enter a letter: ");
+
+    if ($input == "w") {
+        printline("Yayyy, you won!");
+        break;
+    }
+    printline("Noup, guess again");
 }
+
+return 0;

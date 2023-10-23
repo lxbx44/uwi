@@ -11,6 +11,7 @@
 #include "./remove.hpp"
 #include "./toAsm.hpp"
 #include "./parser.hpp"
+#include "./tokenViewer.hpp"
 
 #define UWIC_VERSION "alpha 1.0"
 
@@ -66,6 +67,7 @@ int main(int argc, char* argv[]) {
 
     std::vector<Token> tokens = tokenize(contents, uwiname);
 
+    viewTokens(tokens);
 
 
     /*
