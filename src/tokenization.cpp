@@ -6,24 +6,6 @@
 #include <iostream>
 #include <string>
 
-bool is_valid_float(const std::string& buf) {
-    try {
-        std::stof(buf);
-        return true;
-    } catch (...) {
-        return false;
-    }
-}
-
-bool is_valid_int(const std::string& buf) {
-    try {
-        std::stoi(buf);
-        return true;
-    } catch (...) {
-        return false;
-    }
-}
-
 std::vector<Token> tokenize(const std::string& str, std::string filename) {
     std::vector<Token> tokens;
 

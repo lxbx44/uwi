@@ -1,2 +1,5 @@
 #pragma once
-#include "parser.hpp"
+#include "token.hpp"
+#include <vector>
+
+std::vector<Token> tokenParser(std::vector<Token> tokens);

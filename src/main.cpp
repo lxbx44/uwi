@@ -7,6 +7,8 @@
 #include <vector>
 #include <cstring>
 
+#include "./token.hpp"
+
 #include "./tokenization.hpp"
 #include "./remove.hpp"
 #include "./toAsm.hpp"
@@ -67,8 +69,9 @@ int main(int argc, char* argv[]) {
 
     std::vector<Token> tokens = tokenize(contents, uwiname);
 
-    viewTokens(tokens);
+    std::vector<Token> parsedTokens = tokenParser(tokens);
 
+    viewTokens(parsedTokens);
 
     /*
     {

@@ -3,7 +3,7 @@ BUILD_DIR = build
 CXX = g++ 
 INSTALL_DIR = /usr/local/bin
 
-SRCS = main.cpp tokenization.cpp remove.cpp toAsm.cpp tokenViewer.cpp
+SRCS = main.cpp tokenization.cpp remove.cpp toAsm.cpp tokenViewer.cpp parser.cpp
 OBJS = $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 
 CXXFLAGS = -std=c++17 -Wall
