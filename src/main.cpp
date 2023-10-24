@@ -71,8 +71,6 @@ int main(int argc, char* argv[]) {
 
     std::vector<Token> parsedTokens = tokenParser(tokens);
 
-    viewTokens(parsedTokens);
-
     /*
     {
         std::fstream file("out.asm", std::ios::out);

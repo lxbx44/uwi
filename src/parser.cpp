@@ -1,20 +1,20 @@
 #include <cstddef>
+#include <iostream>
 #include <vector>
 
 #include "parser.hpp"
 #include "token.hpp"
 
+
 std::vector<Token> tokenParser(std::vector<Token> tokens) {
     bool error = false;
 
-    std::vector<Token> parsedTokens;
+    std::vector<Token> buffer;
+    std::vector<std::vector<Token>> instructions;
 
-    int tn = 1; // tn -> token number
-    size_t tt = tokens.size(); // tt -> total tokens
-                               //
-    while (tn <= tt && !error) {
+    int numSemi = 1;
+
+    for (const Token& token : tokens) {
         break;
     }
-
-    return tokens;
 }
