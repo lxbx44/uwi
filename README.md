@@ -1,90 +1,101 @@
-# UWI the programming language
+# uwi Programming Language
 
-## Docs
+- *version: alpha 1.1*
 
+## Introduction
 
-```
-%%
+uwi is a simple, lightweight, and easy-to-learn programming language designed for basic programming as it has a straightforward sintax.
 
-Comments are made by two percentage symbols
-at the beggining and one at the end.
+## Features
 
-Both single and multiple line comments are
-done the same way.
+- Simple sintax
+- Lightweight
+- Easy to learn
+- Easy to compile
+- Fast
 
+## Getting Started
 
-To declare a variable do the following:
-  <type> <name> = <value>;
+### Instalation
 
-TYPES:
-    - str -> string
-    - int -> integers
+Installing the uwi compiler (uwic) is an easy task:
 
-NAMES:
-    - Only alphanumeric values.
-    - Cap sensitive.
-    - No spaces.
-    - IT MUST START WITH `$`
+#### Prebuild packages
 
-VALUES:
-    - String values are between '', "", "' or '".
-    - Integers are just integers.
+- Not aviable yet
 
-SEMICOLON:
-    - Is mandatory
+#### Manual installation (recomended)
 
-%
-
-str $varName = "Bojour";
-int $int1 = 23;
-
-
-%%
-
-To print some text in the terminal
-just call the function `printline();`
-
-If you wanna include variables inside
-the `printline();` do so within square
-brakets:
-    - printline("Hello world");
-    - printline("$[varName] monde");
-
-%
-
-printline("Hello world");
-
-
-%%
-
-To get user input just call the `tinput()`
-function.
-  tinput(<variable to store input>, <some string>);
-
-%
-
-tinput($varName2, "enter some text ");
-
-
-%%
-
-Every program MUST end with a exit status
-this is given by a `return`:
-  return <value from 0 to 255>;
-
-%
-
-return 0;
+Before installing the compiler there are some dependencies that should be installed:
 
 ```
+git
+make
+gcc
+```
+
+Once the dependencies are installed, you can already clone the repo and comile the compiler
+
+`git clone https://github.com/lxbx44/uwi.git`
+
+`cd uwi`
+
+`make install`
+
+Running the `make install` command will automatically add **uwic** to your path.
 
 
+**Testing**
 
-## How to compile **uwic** (uwi compiler)
+If your porpuse is to test the compiler, you can simply run `make`, this will create a binary on the `build/` directory.
 
-`cmake build`
 
-## How to compile **uwi** (.uwi file)
+### Usage
 
-`uwic <filename.uwi to compile>`
+To compile a uwi file, you just need to run the following command:
+
+`uwic <uwi file>`
+
+The uwi file must have the `.uwi` extension.
+
+If you prefear displying some information about the compiler, you can run the `uwic -h` command
+
+### Uninstalling uwic
+
+You can remove the uwi compiler in two different ways:
+
+**Manually**
+
+- remove the compiler from path: `sudo rm -f /usr/bin/uwic`
+
+**From Makefile (recomended)**
+
+- Simply run the `make uninstall`
+
+
+## Language Guide
+
+The main characteristic of uwi is the minimal and simple sintax, 
+
+## Examples
+
+[Include code examples or links to example programs]
+
+
+## Contributing
+
+[Explain how others can contribute to the development of uwi]
+
+## License
+
+[Specify the license for uwi, e.g., MIT, GPL, etc.]
+
+## Contact
+
+[Provide contact information for the project maintainers or developers]
+
+## Acknowledgments
+
+[Mention any libraries, tools, or resources that you used or were inspired by while developing uwi]
+
 

@@ -1,0 +1,14 @@
+int $numToGuess = 2;
+int $input;
+
+loop {
+    tinput($input, "Enter a number: ");
+
+    if ($input == $numToGuess) {
+        printline("Yayyy, you guessed the number. You won!");
+        break;
+    }
+    printline("That wasn't the correct number, give it another try");
+}
+
+return 0;

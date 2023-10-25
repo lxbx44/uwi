@@ -15,7 +15,7 @@
 #include "./parser.hpp"
 #include "./tokenViewer.hpp"
 
-#define UWIC_VERSION "alpha 1.0"
+#define UWIC_VERSION "alpha 1.1"
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
