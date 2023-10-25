@@ -36,11 +36,17 @@ gcc
 
 Once the dependencies are installed, you can already clone the repo and comile the compiler
 
-```git clone https://github.com/lxbx44/uwi.git```
+```
+git clone https://github.com/lxbx44/uwi.git
+```
 
-```cd uwi```
+```
+cd uwi
+```
 
-```make install```
+```
+make install
+```
 
 Running the `make install` command will automatically add **uwic** to your path.
 
