@@ -11,7 +11,7 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
 
     std::string buf;
 
-    int strlength = str.length();
+    size_t strlength = str.length();
 
     size_t line_count = 1;
 

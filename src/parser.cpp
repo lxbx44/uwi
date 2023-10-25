@@ -1,4 +1,5 @@
 #include <cstddef>
+#include <cstdint>
 #include <iostream>
 #include <vector>
 
@@ -7,14 +8,5 @@
 
 
 std::vector<Token> tokenParser(std::vector<Token> tokens) {
-    bool error = false;
-
-    std::vector<Token> buffer;
-    std::vector<std::vector<Token>> instructions;
-
-    int numSemi = 1;
-
-    for (const Token& token : tokens) {
-        break;
-    }
+    return tokens;
 }

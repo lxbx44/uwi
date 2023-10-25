@@ -93,4 +93,3 @@ struct Token {
     TokenTy type;
     std::optional<std::string> value {};
 };
-
