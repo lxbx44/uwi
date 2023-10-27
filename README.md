@@ -129,6 +129,18 @@ bool $boolean = true;
 
 New types will be added in future releases.
 
+When has no value it is `null`
+
+```
+str $nullValue1;
+printline("$nullValue1"); // null
+
+// you can also give a variable a null value not caring about the type
+
+str $nullValue2 = null;
+printline("$nullValue2"); // null
+```
+
 ### Output/Input
 
 **Output**
@@ -186,6 +198,7 @@ for (int $i = 1) in $string.length {
     printline("$i");
 }
 
+// Output:
 // H
 // e
 // l
@@ -206,8 +219,44 @@ printline("$a") // 80
 - When using the `break` keyword the loop will end.
 - When using the `continue` keyword the loop will ignore the rest of the code and go back to the top of the loop
 
+### Conditionals and operators
 
+- Conditionals in uwi are handled by the `if`, `elif` and `else` keywords
+- Inside the condition you can use `||` or `or`, `&&` or `and`, `!` or `not`
 
+#### Operators
+
+- Greater than: `>`
+- Greater or equal than: `>=` 
+- Smaller than: `<`
+- Smaller or eual than: `<=`
+- Equal: `==`
+- Not equal: `!=`
+
+```
+int $a = 2;
+int $b = 13;
+
+if ($a == 2 && $b <= 10) {
+    printline("a is 2 and b is smaller or equal than 10");
+} elif ($a != 2) {
+    printline("a is not 2");
+} elif ($b >= 13) {
+    printline("b is bigger or equal than 13");
+} else {
+    printline("Something else");
+}
+```
+
+### Functions
+
+To declare a function you jut use the `funct` keyword in the following way:
+
+```
+funct myFunction(int arg1, int arg2, str arg3) {
+    // code here
+}
+```
 
 
 ## Examples

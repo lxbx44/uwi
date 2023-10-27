@@ -68,7 +68,7 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
                 tokens.push_back({.type = TokenTy::_print});
             } else if (buf == "tinput") {
                 tokens.push_back({.type = TokenTy::_input});
-            } else if (buf == "function") {
+            } else if (buf == "funct") {
                 tokens.push_back({.type = TokenTy::_function});
             } else if (buf == "true") {
                 tokens.push_back({.type = TokenTy::_true});
@@ -152,6 +152,7 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
                 tokens.push_back({.type = TokenTy::int_l, .value = buf});
             }
 
+            i--;
             buf.clear();
         } else if (c == '\'') {
             i++;

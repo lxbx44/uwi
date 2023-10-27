@@ -70,6 +70,8 @@ int main(int argc, char* argv[]) {
     std::vector<Token> tokens = tokenize(contents, uwiname);
 
     std::vector<Token> parsedTokens = tokenParser(tokens);
+    
+    viewTokens(parsedTokens);
 
     /*
     {
