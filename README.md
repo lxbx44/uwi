@@ -127,7 +127,7 @@ char $character1 = 'd';
 bool $boolean = true;
 ```
 
-New types will be added in future releases.
+- *New types will be added in future releases.*
 
 When has no value it is `null`
 
