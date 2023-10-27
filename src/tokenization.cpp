@@ -99,6 +99,7 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
             }
 
 
+            i--;
             buf.clear();
         }
 
