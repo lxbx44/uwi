@@ -1,6 +1,10 @@
-# uwi Programming Language
+<div align="center">
+	<img src="https://raw.githubusercontent.com/lxbx44/uwi/main/resources/uwilogo.png" width="100" alt="Logo"/><br/>
+	<h3>UWI<br>The Programming Language</h3>
+    <p><em>version: alpha 1.1</em></p>
+</div>
 
-- *version: alpha 1.1*
+___
 
 ## Introduction
 
