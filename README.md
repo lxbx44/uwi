@@ -258,26 +258,22 @@ funct myFunction(int arg1, int arg2, str arg3) {
 }
 ```
 
-
 ## Examples
 
-[Include code examples or links to example programs]
-
+- All examples are in the `examples/` folder
 
 ## Contributing
 
-[Explain how others can contribute to the development of uwi]
+Contributions are welcomed to uwi the programming language! Feel free to fork this repo and change anything. All pull requests and issues will be readed and cnosidered.
 
-## License
-
-[Specify the license for uwi, e.g., MIT, GPL, etc.]
+Donations will be aviable soon!
 
 ## Contact
 
-[Provide contact information for the project maintainers or developers]
+For any conntact you can message me on:
 
-## Acknowledgments
+- **Discord**: `lxbx44`
+- **Element Matrix**: `@lxbx:matrix.org`
+- **Email**: [send mail](mailto:lxbx40@proton.me)
 
-[Mention any libraries, tools, or resources that you used or were inspired by while developing uwi]
-
-
+___
