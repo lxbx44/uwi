@@ -24,6 +24,6 @@ ___
 
 # [Installation and usage](docs/installation.md)
 
-# [Gettimg started](docs/sintax.md)
+# [Getting started](docs/sintax.md)
 
 # [Getting in contact and contributions](docs/contact_contr.md)
