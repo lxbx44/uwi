@@ -22,7 +22,7 @@
 		<img alt="Stargazers" src="https://img.shields.io/github/stars/lxbx44/uwi?style=for-the-badge&logo=starship&color=94e2d5&logoColor=D9E0EE&labelColor=313244"></a>
 	<a href="https://github.com/lxbx44/uwi/releases/latest">
 		<img alt="Releases" src="https://img.shields.io/github/release/lxbx44/uwi.svg?style=for-the-badge&logo=github&color=94e2d5&logoColor=D9E0EE&labelColor=313244"/></a>
-	<a href="https://github.com/catppuccin/catppuccin/issues">
+	<a href="https://github.com/lxbx44/uwi/issues">
 		<img alt="Issues" src="https://img.shields.io/github/issues/lxbx44/uwi?style=for-the-badge&logo=gitbook&color=94e2d5&logoColor=D9E0EE&labelColor=313244"></a>
 </p>
 
