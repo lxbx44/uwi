@@ -8,7 +8,7 @@
 <h6 align="center">
   <a href="https://github.com/lxbx44/uwi/blob/main/docs/uwic.md">uwic</a>
   ·
-  <a href="https://github.com/lxbx44/uwi/blob/main/docs/docs.md">uwi docs</a>
+  <a href="https://github.com/lxbx44/uwi/blob/main/docs/docs.md">docs</a>
   ·
   <a href="https://github.com/lxbx44/uwi/blob/main/docs/contribute.md">contributing</a>
 </h6>
