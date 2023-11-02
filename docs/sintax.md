@@ -16,7 +16,7 @@ For example, returning `0` will mean succes, returning `1` will mean failure. (o
 
 **comments**
 
-In uwi, comments are denoted by `//`. Anything following a `//` on a line is considered a comment and is ignored by the interpreter.
+In uwi, comments are denoted by `//`. Anything following a `//` on a line is considered a comment and is ignored by the compiler.
 
 Example:
 
