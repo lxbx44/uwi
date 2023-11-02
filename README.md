@@ -1,5 +1,5 @@
 <h3 align="center">
-	<img src="https://raw.githubusercontent.com/lxbx44/uwi/main/resources/uwilogo.png" width="100" alt="Logo"/><br/>
+	<img src="https://raw.githubusercontent.com/lxbx44/uwi/main/resources/uwilogo.png" width="125" alt="Logo"/><br/>
 	<img src="https://raw.githubusercontent.com/lxbx44/uwi/main/resources/transparent.png" height="30" width="0px"/>
 	UWI The Programming Language
 	<img src="https://raw.githubusercontent.com/lxbx44/uwi/main/resources/transparent.png" height="30" width="0px"/>
