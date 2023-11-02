@@ -7,8 +7,9 @@
     <p><em>version: alpha 1.1</em></p>
 </div>
 
-___
-
+<div align="center">
+    <img src="https://raw.githubusercontent.com/lxbx44/uwi/main/resources/line.png">
+</div>
 
 uwi is a simple, lightweight, and easy-to-learn programming language designed for basic programming as it has a straightforward sintax.
 
