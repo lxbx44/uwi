@@ -74,7 +74,7 @@ void viewTokens(std::vector<Token> tokens) {
     for (const Token& token : tokens) {
         std::cout << "Token Type: " << tokenTypeToString(token.type);
         if (token.value) {
-            std::cout << "    Token value: " << token.value.value();
+            std::cout << "\n        -> Token value: " << token.value.value();
         }
         std::cout << std::endl;
     }
