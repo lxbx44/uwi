@@ -111,7 +111,6 @@ int main(int argc, char* argv[]) {
 
     std::vector<Token> parsedTokens = tokenParser(tokens);
     
-    //viewTokens(parsedTokens);
 
     /*
     {

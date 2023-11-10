@@ -6,7 +6,7 @@
 
 std::string tokenTypeToString(TokenTy type) {
     switch (type) {
-        case TokenTy::newline: return "newline";
+        case TokenTy::newline: return "New Line";
         case TokenTy::_if: return "if";
 case TokenTy::_elif: return "elif";
         case TokenTy::_else: return "else";
@@ -38,9 +38,9 @@ case TokenTy::_elif: return "elif";
         case TokenTy::_div: return "division";
         case TokenTy::_mod: return "modulo";
         case TokenTy::_gt: return "greater than";
-        case TokenTy::_st: return "less than";
+        case TokenTy::_st: return "smaller than";
         case TokenTy::_get: return "greater than or equal to";
-        case TokenTy::_set: return "less than or equal to";
+        case TokenTy::_set: return "smaller than or equal to";
         case TokenTy::_equal: return "equal to";
         case TokenTy::_notequal: return "not equal to";
         case TokenTy::_and: return "logical and";
@@ -52,8 +52,8 @@ case TokenTy::_elif: return "elif";
         case TokenTy::_asign_mult: return "multiplication assignment";
         case TokenTy::_asign_div: return "division assignment";
         case TokenTy::_asign_mod: return "modulo assignment";
-        case TokenTy::_sum1: return "increment";
-        case TokenTy::_sub1: return "decrement";
+        case TokenTy::_sum1: return "increment (+1)";
+        case TokenTy::_sub1: return "decrement (-1)";
         case TokenTy::_semicolon: return "semicolon";
         case TokenTy::_coma: return "comma";
         case TokenTy::_period: return "period";
@@ -66,7 +66,7 @@ case TokenTy::_elif: return "elif";
         case TokenTy::_right_sqbraquet: return "right square bracket";
         case TokenTy::_comment: return "comment";
         case TokenTy::_var_name: return "variable name";
-        default: return "unknown";
+        default: return "unknown: token not reconized";
     }
 }
 
@@ -74,7 +74,7 @@ void viewTokens(std::vector<Token> tokens) {
     for (const Token& token : tokens) {
         std::cout << "Token Type: " << tokenTypeToString(token.type);
         if (token.value) {
-            std::cout << " - Value: " << token.value.value();
+            std::cout << "    Token value: " << token.value.value();
         }
         std::cout << std::endl;
     }
