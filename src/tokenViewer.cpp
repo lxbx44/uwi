@@ -8,7 +8,7 @@ std::string tokenTypeToString(TokenTy type) {
     switch (type) {
         case TokenTy::newline: return "New Line";
         case TokenTy::_if: return "if";
-case TokenTy::_elif: return "elif";
+        case TokenTy::_elif: return "elif";
         case TokenTy::_else: return "else";
         case TokenTy::_loop: return "loop";
         case TokenTy::_for: return "for";
