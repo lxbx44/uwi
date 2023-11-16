@@ -20,7 +20,7 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
         
         // SPACE
 
-        while (c == ' ') {
+        while (i < str.length() && c == ' ') {
             i++;
             c = str.at(i);
         }
@@ -104,15 +104,15 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
             i++;
             int cond = true;
             while (cond) {
-                if (str.at(i) == '\\' && str.at(i + 1) == '"') {
-                    buf.push_back('"');
-                    i += 2;
-                } else if (i >= strlength) {
+                if (i >= strlength) {
                     std::cerr << "error in " << filename << ".uwi on line " << line_count;
                     std::cerr << "\nerror message: Syntax error\n";
                     std::cerr << " --> Line " << line_count << ": " << str.substr(i - buf.length(), buf.length()) << "\n";
                     std::cerr << " --> " << "String literal not terminated\n";
                     exit(EXIT_FAILURE);
+                } else if (str.at(i) == '\\' && str.at(i + 1) == '"') {
+                    buf.push_back('"');
+                    i += 2;
                 } else if (str.at(i) == '"') {
                     cond = false;
                 } else {
@@ -191,6 +191,9 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
         } else if (c == '*') {
             if (str.at(i + 1) == '=') {
                 tokens.push_back({.type = TokenTy::_asign_mult});
+                i++;
+            } else if (str.at(i + 1) == '*') {
+                tokens.push_back({.type = TokenTy::_pow});
                 i++;
             } else {
                 tokens.push_back({.type = TokenTy::_mult});
