@@ -26,10 +26,10 @@ int main(int argc, char* argv[]) {
         std::cout << "UWIC, the official compiler\nfor the uwi programming language\n" << std::endl;
         std::cout << "Usage: `uwic <file.uwi>`" << std::endl;
         std::cout << "Options:" << std::endl;
-        std::cout << "    -h              show this help page" << std::endl;
-        std::cout << "    --help          show this help page" << std::endl;
-        std::cout << "    -v              show version of the program" << std::endl;
-        std::cout << "    --version       show version of the program" << std::endl;
+        std::cout << "    -h               show this help page" << std::endl;
+        std::cout << "    --help           show this help page" << std::endl;
+        std::cout << "    -v               show version of the program" << std::endl;
+        std::cout << "    --version        show version of the program" << std::endl;
         std::cout << "    -T / --tokens    view your uwi code as tokens" << std::endl;
 
         std::cout << "\nIf you notice any bugs open an isue in the github repo:"  << std::endl;
