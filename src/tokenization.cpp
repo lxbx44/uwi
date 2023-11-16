@@ -91,11 +91,6 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
                 std::cerr << " --> " << "Unexpected token: '" << buf << "'\n";
                 std::cerr << "\nerror: Found an unexpected token. Expected a valid keyword or identifier.\n";
                 exit(EXIT_FAILURE);
-
-                exit(EXIT_FAILURE);
-
-
-                exit(EXIT_FAILURE);
             }
 
 
@@ -107,8 +102,8 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
         
         else if (c == '"') {
             i++;
-            int cond = 0;
-            while (cond == 0) {
+            int cond = true;
+            while (cond) {
                 if (str.at(i) == '\\' && str.at(i + 1) == '"') {
                     buf.push_back('"');
                     i += 2;
@@ -119,7 +114,7 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
                     std::cerr << " --> " << "String literal not terminated\n";
                     exit(EXIT_FAILURE);
                 } else if (str.at(i) == '"') {
-                    cond = 1;
+                    cond = false;
                 } else {
                     buf.push_back(str.at(i));
                     i++;
