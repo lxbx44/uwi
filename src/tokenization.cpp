@@ -324,5 +324,8 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
             exit(EXIT_FAILURE);
         }
     }
+
+    tokens.push_back({.type = TokenTy::_EOF});
+
     return tokens;
 };

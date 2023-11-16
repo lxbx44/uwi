@@ -87,7 +87,9 @@ enum class TokenTy {
 
     // Other
     _comment,
-    _var_name
+    _var_name,
+
+    _EOF
 };
 
 struct Token {

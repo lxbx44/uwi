@@ -67,6 +67,7 @@ std::string tokenTypeToString(TokenTy type) {
         case TokenTy::_right_sqbraquet: return "right square bracket";
         case TokenTy::_comment: return "comment";
         case TokenTy::_var_name: return "variable name";
+        case TokenTy::_EOF: return "end of file";
         default: return "unknown: token not reconized";
     }
 }
