@@ -36,6 +36,7 @@ std::string tokenTypeToString(TokenTy type) {
         case TokenTy::_subtraction: return "subtraction";
         case TokenTy::_mult: return "multiplication";
         case TokenTy::_div: return "division";
+        case TokenTy::_pow: return "power";
         case TokenTy::_mod: return "modulo";
         case TokenTy::_gt: return "greater than";
         case TokenTy::_st: return "smaller than";

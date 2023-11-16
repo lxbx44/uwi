@@ -46,6 +46,7 @@ enum class TokenTy {
     _subtraction,
     _mult,
     _div,
+    _pow,
     _mod,
 
     _gt,
