@@ -28,25 +28,15 @@
 		<img alt="Issues" src="https://img.shields.io/github/contributors/lxbx44/uwi?style=for-the-badge&logo=gitbook&color=94e2d5&logoColor=D9E0EE&labelColor=313244"></a>
 </p>
 
-&nbsp;
+Uwilang or simply uwi is a simple, lightweight, and easy-to-learn programming language designed for basic programming as it has a straightforward sintax.
 
-
-uwi is a simple, lightweight, and easy-to-learn programming language designed for basic programming as it has a straightforward sintax.
-
-
-## Features
+## Main features
 - Simple sintax
 - Lightweight
 - Easy to learn
 - Easy to compile
-- Fast
-
+- (Blazingly) fast
 
 ___
 
-
-# [Installation and usage](docs/installation.md)
-
-# [Getting started](docs/sintax.md)
-
-# [Getting in contact and contributions](docs/contact_contr.md)
+# [Uwilang documentation](docs/docs.md)

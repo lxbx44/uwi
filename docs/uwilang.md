@@ -1,42 +1,25 @@
-### Basic sintax
+# uwilang
 
-Every statement ends with a semicolon `;`.
+Like it has been said before, uwi is a easy to learn programming language due to its easy syntax. When reading this file you will learn how the language works and how to start developing some programs with it.
 
-**return**
+## Basic syntax
 
-Every program must have a return value, in other words every program must end the following way:
-
-```
-// prev code
-
-return <int between 0-255>;
-```
-
-For example, returning `0` will mean succes, returning `1` will mean failure. (other return values will be added soon)
-
-**comments**
-
-In uwi, comments are denoted by `//`. Anything following a `//` on a line is considered a comment and is ignored by the compiler.
-
-Example:
-
-```
+- Every statement must end with a semicolon `;`.
+- In uwi, comments are denoted by `//`. Anything following a `//` on a line is considered a comment and is ignored by the compiler.
+``` uwi
 // This is a comment
 printline("Hello world!"); // This is also a comment
-
-return 0;
 ```
 
-### Variables
+## Variables
 
 Variables in uwi are used to store data. Variable names are case-sensitive and must adhere to the following rules:
 
-- Variable names must be declared by its type at the beggining followed by the variable name
-- The variable name must start with a dollar sign `$` and letters and numbers
+- Variable names must be declared by its type at the beginning followed by the variable name.
+- The variable name must start with a dollar sign `$` and contain letters and numbers only.
 - To assign a value to a variable, use the `=` symbol.
 
-
-```
+``` uwi
 str $string1 = "This is a string";
 int $integer1 = 3;
 float $float1 = 3.4;
@@ -44,11 +27,11 @@ char $character1 = 'd';
 bool $boolean = true;
 ```
 
-- *New types will be added in future releases.*
+*Note 1: - New types will be added in future releases.*
 
-When has no value it is `null`
+*Note 2: When a variable has been declared but hasn't been initialized value it is `null`*
 
-```
+``` uwi
 str $nullValue1;
 printline("$nullValue1"); // null
 
@@ -58,13 +41,13 @@ str $nullValue2 = null;
 printline("$nullValue2"); // null
 ```
 
-### Output/Input
+## Output/Input
 
-**Output**
+### Output
 
-In this programming language, the output is handled by the `printline()` function. It works as folloed:
+In this programming language, the output is handled by the `printline()` function. It works as shown:
 
-```
+``` uwi
 printline("Hello world!"); // Hello world!
 
 str $name = "Alice";
@@ -73,11 +56,11 @@ int $age = 23;
 printline("I'm $name and I am $age yeas old!"); // I'm Alice and I am 23 years old!
 ```
 
-**input**
+### Input
 
 To handle input you need and declard variable (int, str, float or char) and then call the `tinput()` function:
 
-```
+``` uwi
 str $myString;
 tinput($myString, "Enter some text: ");
 
@@ -85,33 +68,37 @@ int $myInteger;
 tinput($myInteger, "Enter some integer: ");
 ```
 
-### Loops
+## Loops
 
 The uwi language provides two types of loops:
 
 - *loop* loops
 - *for* loops
 
-**loop**
+### Loop
 
 This type of loop uses the `loop` keyword:
 
-```
+``` uwi
 loop {
     // stuff to do
+
+	if (<condition>) {
+		break;
+	}
 }
 ```
 
-**for**
+### For loop
 
-This other type of loops uses the `for keyword`.
+This other type of loops uses the `for` keyword.
 
 - It can be used with the `in` or the `times` keyword:
 
-```
+``` uwi
 str $string = "Hello";
 
-for (int $i = 1) in $string.length {
+for (int $i = 1) in ($string.length) {
     printline("$i");
 }
 
@@ -123,10 +110,10 @@ for (int $i = 1) in $string.length {
 // o
 ```
 
-```
+``` uwi
 int $a = 10;
 
-for times($a, 3) {
+for times(3) {
     $a += $a;
 }
 
@@ -136,21 +123,21 @@ printline("$a") // 80
 - When using the `break` keyword the loop will end.
 - When using the `continue` keyword the loop will ignore the rest of the code and go back to the top of the loop
 
-### Conditionals and operators
+## Conditionals and operators
 
 - Conditionals in uwi are handled by the `if`, `elif` and `else` keywords
 - Inside the condition you can use `||` or `or`, `&&` or `and`, `!` or `not`
 
-#### Operators
+### Operators
 
 - Greater than: `>`
 - Greater or equal than: `>=` 
 - Smaller than: `<`
-- Smaller or eual than: `<=`
+- Smaller or equal than: `<=`
 - Equal: `==`
 - Not equal: `!=`
 
-```
+``` uwi
 int $a = 2;
 int $b = 13;
 
@@ -165,17 +152,18 @@ if ($a == 2 && $b <= 10) {
 }
 ```
 
-### Functions
+## Functions
 
 To declare a function you jut use the `funct` keyword in the following way:
 
-```
+``` uwi
 funct myFunction(int arg1, int arg2, str arg3) {
     // code here
+
+	return <>;
 }
 ```
 
+# Examples
 
-## Examples
-
-All the examples for this language are in the `examples/` directory
+All the examples for this programming language are in the `examples/` directory.

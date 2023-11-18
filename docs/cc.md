@@ -13,6 +13,6 @@ ___
 
 ## Contributions
 
-Contributions are welcomed to uwi the programming language! Feel free to fork this repo and change anything. All pull requests and issues will be readed and cnosidered.
+Contributions are welcomed to uwi the programming language! Feel free to fork this repo and change anything. All pull requests and issues will be read and considered.
 
-Donations will be aviable soon!
+Donations will be available soon!
