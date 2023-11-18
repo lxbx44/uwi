@@ -26,4 +26,7 @@ $(BUILD_DIR):
 clean:
 	rm -rf $(BUILD_DIR)
 
+uninstall:
+	sudo rm -f $(INSTALL_DIR)/uwic
+
 .PHONY: all clean install
