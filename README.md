@@ -6,7 +6,7 @@
 </h3>
 
 <h6 align="center">
-  <a href="ariadev.me/uwi">uwi's website</a>
+  <a href="https://ariadev.me/uwi">uwi's website</a>
   ·
   <a href="https://github.com/lxbx44/uwi/blob/main/docs/docs.md">docs</a>
   ·
