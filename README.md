@@ -6,11 +6,11 @@
 </h3>
 
 <h6 align="center">
-  <a href="https://github.com/lxbx44/uwi/blob/main/docs/uwic.md">uwic</a>
+  <a href="ariadev.me/uwi">uwi's website</a>
   ·
   <a href="https://github.com/lxbx44/uwi/blob/main/docs/docs.md">docs</a>
   ·
-  <a href="https://github.com/lxbx44/uwi/blob/main/docs/contribute.md">contributing</a>
+  <a href="https://github.com/lxbx44/uwi/blob/main/docs/cc.md">contributing</a>
 </h6>
 
 <p align="center">
