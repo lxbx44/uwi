@@ -401,6 +401,56 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
 
 
 
+        /*
+         *   PRINTLINE TINPUT
+         */
+
+        if (tokens[n].type == ty::_print) {
+            if (tokens[n + 1].type != ty::_left_par) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: syntax error\n";
+                std::cerr << " --> line " << line_count;
+                std::cerr << "\nA left parenthesis is required: printline();\n";
+                exit(EXIT_FAILURE);
+            }
+            if (tokens[n + 2].type != ty::str_l &&
+                tokens[n + 2].type != ty::int_l &&
+                tokens[n + 2].type != ty::float_l &&
+                tokens[n + 2].type != ty::char_l &&
+                tokens[n + 2].type != ty::_null &&
+                tokens[n + 2].type != ty::_bool) {
+
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: syntax error\n";
+                std::cerr << " --> line " << line_count;
+                std::cerr << "\nA type is required inside the parenthesis:";
+                std::cerr << "\n   - string";
+                std::cerr << "\n   - integer";
+                std::cerr << "\n   - float";
+                std::cerr << "\n   - character";
+                std::cerr << "\n   - boolean";
+                std::cerr << "\n   - null\n";
+                exit(EXIT_FAILURE);
+            }
+            if (tokens[n + 3].type != ty::_right_par) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: syntax error\n";
+                std::cerr << " --> line " << line_count;
+                std::cerr << "\nA right parenthesis is required: printline();\n";
+                exit(EXIT_FAILURE);
+            }
+            if (tokens[n + 4].type != ty::_semicolon) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: syntax error\n";
+                std::cerr << " --> line " << line_count;
+                std::cerr << "\nA semicolon is required: printline();\n";
+                exit(EXIT_FAILURE);
+            }
+
+            n += 5;
+            continue;
+        }
+
     }
     std::cout << "Program finished" << std::endl;
 
