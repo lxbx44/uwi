@@ -312,6 +312,7 @@ std::vector<Token> tokenize(const std::string& str, std::string filename) {
                 buf.push_back(str.at(i));
                 i++;
             }
+            i--;
 
             tokens.push_back({.type = TokenTy::_var_name, .value = buf});
             buf.clear();

@@ -37,6 +37,10 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                 std::cerr << "\nerror: After token 'str' there must be a variable name: $<var name>\n";
                 exit(EXIT_FAILURE);
             }
+            if (tokens[n + 2].type == ty::_semicolon) {
+                n += 3;
+                continue;
+            }
             if (tokens[n + 2].type != ty::_asign) {
                 std::cerr << "error in " << filename << ".uwi on line " << line_count;
                 std::cerr << "\nerror message: syntax error\n";
@@ -74,6 +78,8 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                         std::cerr << "\nerror: after token assigning, there must be a string literal, not a boolean\n";
                         exit(EXIT_FAILURE);
                         break;
+                    case ty::_null:
+                        break;
                     default:
                         std::cerr << "error in " << filename << ".uwi on line " << line_count;
                         std::cerr << "\nerror message: syntax error\n";
@@ -106,7 +112,11 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                 std::cerr << "\nerror: After token 'int' there must be a variable name: $<var name>\n";
                 exit(EXIT_FAILURE);
             }
-            if (tokens[n + 2].type != ty::_asign) {
+
+            if (tokens[n + 2].type == ty::_semicolon) {
+                n += 3;
+                continue;
+            } else if (tokens[n + 2].type != ty::_asign) {
                 std::cerr << "error in " << filename << ".uwi on line " << line_count;
                 std::cerr << "\nerror message: syntax error\n";
                 std::cerr << " --> line " << line_count;
@@ -143,6 +153,8 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                         std::cerr << "\nerror: after token assigning, there must be an integer literal, not a boolean\n";
                         exit(EXIT_FAILURE);
                         break;
+                    case ty::_null:
+                        break;
                     default:
                         std::cerr << "error in " << filename << ".uwi on line " << line_count;
                         std::cerr << "\nerror message: syntax error\n";
@@ -174,7 +186,11 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                 std::cerr << "\nerror: After token 'float' there must be a variable name: $<var name>\n";
                 exit(EXIT_FAILURE);
             }
-            if (tokens[n + 2].type != ty::_asign) {
+
+            if (tokens[n + 2].type == ty::_semicolon) {
+                n += 3;
+                continue;
+            } else if (tokens[n + 2].type != ty::_asign) {
                 std::cerr << "error in " << filename << ".uwi on line " << line_count;
                 std::cerr << "\nerror message: syntax error\n";
                 std::cerr << " --> line " << line_count;
@@ -211,6 +227,8 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                         std::cerr << "\nerror: after token assigning, there must be a float literal, not a boolean\n";
                         exit(EXIT_FAILURE);
                         break;
+                    case ty::_null:
+                        break;
                     default:
                         std::cerr << "error in " << filename << ".uwi on line " << line_count;
                         std::cerr << "\nerror message: syntax error\n";
@@ -243,7 +261,11 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                 std::cerr << "\nerror: After token 'char' there must be a variable name: $<var name>\n";
                 exit(EXIT_FAILURE);
             }
-            if (tokens[n + 2].type != ty::_asign) {
+
+            if (tokens[n + 2].type == ty::_semicolon) {
+                n += 3;
+                continue;
+            } else if (tokens[n + 2].type != ty::_asign) {
                 std::cerr << "error in " << filename << ".uwi on line " << line_count;
                 std::cerr << "\nerror message: syntax error\n";
                 std::cerr << " --> line " << line_count;
@@ -280,6 +302,8 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                         std::cerr << "\nerror: after token assigning, there must be a character literal, not a boolean\n";
                         exit(EXIT_FAILURE);
                         break;
+                    case ty::_null:
+                        break;
                     default:
                         std::cerr << "error in " << filename << ".uwi on line " << line_count;
                         std::cerr << "\nerror message: syntax error\n";
@@ -312,7 +336,11 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                 std::cerr << "\nerror: After token 'bool' there must be a variable name: $<var name>\n";
                 exit(EXIT_FAILURE);
             }
-            if (tokens[n + 2].type != ty::_asign) {
+
+            if (tokens[n + 2].type == ty::_semicolon) {
+                n += 3;
+                continue;
+            } else if (tokens[n + 2].type != ty::_asign) {
                 std::cerr << "error in " << filename << ".uwi on line " << line_count;
                 std::cerr << "\nerror message: syntax error\n";
                 std::cerr << " --> line " << line_count;
@@ -348,6 +376,8 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                         std::cerr << " --> line " << line_count;
                         std::cerr << "\nerror: after token assigning, there must be a boolean, not a character\n";
                         exit(EXIT_FAILURE);
+                        break;
+                    case ty::_null:
                         break;
                     default:
                         std::cerr << "error in " << filename << ".uwi on line " << line_count;

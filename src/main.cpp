@@ -15,7 +15,7 @@
 #include "./parser.hpp"
 #include "./tokenViewer.hpp"
 
-#define UWIC_VERSION "0.1.1 BETA"
+#define UWIC_VERSION "0.1.2 BETA"
 
 int main(int argc, char* argv[]) {
     if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0) {
