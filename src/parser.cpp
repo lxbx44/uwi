@@ -405,12 +405,14 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
          *   PRINTLINE TINPUT
          */
 
+        // printline
         if (tokens[n].type == ty::_print) {
             if (tokens[n + 1].type != ty::_left_par) {
                 std::cerr << "error in " << filename << ".uwi on line " << line_count;
                 std::cerr << "\nerror message: syntax error\n";
                 std::cerr << " --> line " << line_count;
-                std::cerr << "\nA left parenthesis is required: printline();\n";
+                std::cerr << "\nA left parenthesis is required: printline();";
+                std::cerr << "\n                                         ^\n";
                 exit(EXIT_FAILURE);
             }
             if (tokens[n + 2].type != ty::str_l &&
@@ -436,18 +438,77 @@ std::vector<Token> tokenParser(std::vector<Token> tokens, std::string filename) 
                 std::cerr << "error in " << filename << ".uwi on line " << line_count;
                 std::cerr << "\nerror message: syntax error\n";
                 std::cerr << " --> line " << line_count;
-                std::cerr << "\nA right parenthesis is required: printline();\n";
+                std::cerr << "\nA right parenthesis is required: printline();";
+                std::cerr << "\n                                           ^\n";
                 exit(EXIT_FAILURE);
             }
             if (tokens[n + 4].type != ty::_semicolon) {
                 std::cerr << "error in " << filename << ".uwi on line " << line_count;
                 std::cerr << "\nerror message: syntax error\n";
                 std::cerr << " --> line " << line_count;
-                std::cerr << "\nA semicolon is required: printline();\n";
+                std::cerr << "\nA semicolon is required: printline();";
+                std::cerr << "\n                                    ^\n";
                 exit(EXIT_FAILURE);
             }
 
             n += 5;
+            continue;
+        }
+
+        // tinput
+        // tinput($myString, "Enter some text: ");
+
+        if (tokens[n].type == ty::_input) {
+            if (tokens[n + 1].type != ty::_left_par) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: syntax error\n";
+                std::cerr << " --> line " << line_count;
+                std::cerr << "\nA left parenthesis is required: tinput($varName, \"\");";
+                std::cerr << "\n                                      ^\n";
+                exit(EXIT_FAILURE);
+            }
+            if (tokens[n + 2].type != ty::_var_name) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: syntax error\n";
+                std::cerr << " --> line " << line_count;
+                std::cerr << "\nA variable to asign the input is required: tinput($varName, \"\");";
+                std::cerr << "\n                                                  ^\n";
+                exit(EXIT_FAILURE);
+            }
+            if (tokens[n + 3].type != ty::_coma) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: syntax error\n";
+                std::cerr << " --> line " << line_count;
+                std::cerr << "\nA coma is required between the variable name and string: tinput($varName, \"\");";
+                std::cerr << "\n                                                                        ^\n";
+                exit(EXIT_FAILURE);
+            }
+            if (tokens[n + 4].type != ty::str_l) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: syntax error\n";
+                std::cerr << " --> line " << line_count;
+                std::cerr << "\nA string literal is required as to print something: tinput($varName, \"\");";
+                std::cerr << "\n                                                                     ^\n";
+                exit(EXIT_FAILURE);
+            }
+            if (tokens[n + 5].type != ty::_right_par) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: syntax error\n";
+                std::cerr << " --> line " << line_count;
+                std::cerr << "\nA right parenthesis is required: tinput($varName, \"\");";
+                std::cerr << "\n                                                    ^\n";
+                exit(EXIT_FAILURE);
+            }
+            if (tokens[n + 6].type != ty::_semicolon) {
+                std::cerr << "error in " << filename << ".uwi on line " << line_count;
+                std::cerr << "\nerror message: syntax error\n";
+                std::cerr << " --> line " << line_count;
+                std::cerr << "\nA semicolon is required: tinput($varName, \"\");";
+                std::cerr << "\n                                             ^\n";
+                exit(EXIT_FAILURE);
+            }
+
+            n += 7;
             continue;
         }
 
